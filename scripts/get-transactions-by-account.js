@@ -1,3 +1,4 @@
+// https://ethereum.stackexchange.com/questions/2531/common-useful-javascript-snippets-for-geth/3478#3478
 function getTransactionsByAccount(myaccount, startBlockNumber, endBlockNumber) {
   if (endBlockNumber == null) {
     endBlockNumber = eth.blockNumber;
