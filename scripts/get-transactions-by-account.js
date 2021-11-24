@@ -18,7 +18,7 @@ function getTransactionsByAccount(myaccount, startBlockNumber, endBlockNumber) {
       endBlockNumber
   );
 
-  for (const i = startBlockNumber; i <= endBlockNumber; i++) {
+  for (let i = startBlockNumber; i <= endBlockNumber; i++) {
     if (i % 1000 === 0) {
       console.log("Searching block " + i);
     }
