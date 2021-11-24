@@ -1,10 +1,11 @@
+// Modified from the stackexchange post:
 // https://ethereum.stackexchange.com/questions/2531/common-useful-javascript-snippets-for-geth/3478#3478
 function getTransactionsByAccount(myaccount, startBlockNumber, endBlockNumber) {
-  if (endBlockNumber == null) {
+  if (endBlockNumber === null) {
     endBlockNumber = eth.blockNumber;
     console.log("Using endBlockNumber: " + endBlockNumber);
   }
-  if (startBlockNumber == null) {
+  if (startBlockNumber === null) {
     startBlockNumber = endBlockNumber - 1000;
     console.log("Using startBlockNumber: " + startBlockNumber);
   }
@@ -17,38 +18,38 @@ function getTransactionsByAccount(myaccount, startBlockNumber, endBlockNumber) {
       endBlockNumber
   );
 
-  for (var i = startBlockNumber; i <= endBlockNumber; i++) {
-    if (i % 1000 == 0) {
+  for (const i = startBlockNumber; i <= endBlockNumber; i++) {
+    if (i % 1000 === 0) {
       console.log("Searching block " + i);
     }
-    var block = eth.getBlock(i, true);
-    if (block != null && block.transactions != null) {
-      block.transactions.forEach(function (e) {
-        if (myaccount == "*" || myaccount == e.from || myaccount == e.to) {
+    const block = eth.getBlock(i, true);
+    if (block !== null && block.transactions !== null) {
+      block.transactions.forEach((transaction) => {
+        if (myaccount === "*" || myaccount === transaction.from || myaccount === transaction.to) {
           console.log(
             "  tx hash          : " +
-              e.hash +
+              transaction.hash +
               "\n" +
               "   nonce           : " +
-              e.nonce +
+              transaction.nonce +
               "\n" +
               "   blockHash       : " +
-              e.blockHash +
+              transaction.blockHash +
               "\n" +
               "   blockNumber     : " +
-              e.blockNumber +
+              transaction.blockNumber +
               "\n" +
               "   transactionIndex: " +
-              e.transactionIndex +
+              transaction.transactionIndex +
               "\n" +
               "   from            : " +
-              e.from +
+              transaction.from +
               "\n" +
               "   to              : " +
-              e.to +
+              transaction.to +
               "\n" +
               "   value           : " +
-              e.value +
+              transaction.value +
               "\n" +
               "   time            : " +
               block.timestamp +
@@ -56,13 +57,13 @@ function getTransactionsByAccount(myaccount, startBlockNumber, endBlockNumber) {
               new Date(block.timestamp * 1000).toUTCString() +
               "\n" +
               "   gasPrice        : " +
-              e.gasPrice +
+              transaction.gasPrice +
               "\n" +
               "   gas             : " +
-              e.gas +
+              transaction.gas +
               "\n" +
               "   input           : " +
-              e.input
+              transaction.input
           );
         }
       });
